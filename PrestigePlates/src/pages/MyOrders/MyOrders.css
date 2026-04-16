@@ -1,0 +1,100 @@
+.my-orders {
+  margin: 40px;
+}
+
+.my-orders h2 {
+  margin-bottom: 20px;
+}
+
+.my-orders .container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Desktop Layout */
+.my-orders-order {
+  display: grid;
+  grid-template-columns: 60px 2fr 1fr 1fr 1fr 120px;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* Image */
+.my-orders-order img {
+  width: 50px;
+}
+
+/* Text */
+.my-orders-order p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Status */
+.my-orders-order span {
+  color: orange;
+}
+
+/* Button */
+.my-orders-order button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #ff4d4d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.my-orders-order button:hover {
+  background-color: #e60000;
+}
+
+/* 📱 Tablet */
+@media (max-width: 900px) {
+  .my-orders {
+    margin: 20px;
+  }
+
+  .my-orders-order {
+    grid-template-columns: 50px 1fr 1fr;
+    row-gap: 10px;
+  }
+
+  .my-orders-order p:nth-child(3),
+  .my-orders-order p:nth-child(4),
+  .my-orders-order p:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .my-orders-order button {
+    grid-column: span 3;
+    width: 100%;
+  }
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+  .my-orders {
+    margin: 10px;
+  }
+
+  .my-orders-order {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .my-orders-order img {
+    width: 40px;
+  }
+
+  .my-orders-order button {
+    width: 100%;
+    text-align: center;
+  }
+}

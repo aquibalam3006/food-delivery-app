@@ -1,0 +1,31 @@
+.orders-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.order-left{
+  flex: 1;
+}
+
+.order-right select{
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+  .order-card{
+    flex-direction: column;
+    gap: 10px;
+  }
+}
