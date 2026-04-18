@@ -10,11 +10,14 @@ import orderRouter from "./routes/orderRoute.js"
 
 // app configuration
 const app = express()
+
 const port = 4000
 
 // middleware
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: "*"
+}));
 
 // DB connection
 connectDB();
