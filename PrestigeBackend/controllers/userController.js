@@ -4,32 +4,33 @@ import bcrypt from "bcrypt"
 import validator from "validator"
 
 
-// login user
+// login user (UPDATE)
 const loginUser = async (req,res) => {
     const {email,password} = req.body ;
     try{
-        // chaeck is user exists
         const user = await UserModel.findOne({email});
         if(!user){
             return res.json({success:false,message:"User Doesn't exist"})
         } 
 
-        // compare password
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch){
             return res.json({success:false,message:"Incorrect password"})
         }
 
-        // create and send jwt token
         const token = createToken(user._id)
-        res.json({success:true,token})
 
-    }
-    catch(error){
+        // 🔥 IMPORTANT
+        res.json({
+            success:true,
+            token,
+            role:user.role   // 👈 ye add karo
+        })
+
+    } catch(error){
         console.log(error);
         res.json({success:false,message:"Failed to login"})
     }
-   
 }
 
 
