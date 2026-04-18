@@ -4,39 +4,44 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("http://localhost:4000/api/user/login",{
+    const BASE_URL =
+      window.location.hostname === "localhost"
+        ? "http://localhost:4000"
+        : "https://food-delivery-app-lg9f.onrender.com";
+
+    const res = await axios.post(`${BASE_URL}/api/user/login`, {
       email,
-      password
+      password,
     });
 
-    if(res.data.success){
-      
-      if(res.data.role === "admin"){
+    if (res.data.success) {
+
+      if (res.data.role === "admin") {
         localStorage.setItem("adminToken", res.data.token);
         navigate("/");   // ✅ FIX
-      }else{
+      } else {
         alert("Not Admin ❌");
       }
 
-    }else{
+    } else {
       alert(res.data.message);
     }
   }
 
   return (
-    <div style={{textAlign:"center",marginTop:"100px"}}>
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
       <h2>Admin Login 🔐</h2>
       <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" onChange={(e)=>setEmail(e.target.value)} /><br/><br/>
-        <input type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} /><br/><br/>
+        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} /><br /><br />
+        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} /><br /><br />
         <button type="submit">Login</button>
       </form>
     </div>
