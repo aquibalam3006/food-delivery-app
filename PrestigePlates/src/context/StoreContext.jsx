@@ -10,7 +10,10 @@ const StoreContextProvider = (props) => {
     const clearCart = () => {
         setCartItems({});
     };
-    const url = "http://localhost:4000 || https://food-delivery-app-lg9f.onrender.com"
+    const url =
+    window.location.hostname === "localhost"
+    ? "http://localhost:4000"
+    : "https://food-delivery-app-lg9f.onrender.com";
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([])
 
