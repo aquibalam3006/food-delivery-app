@@ -1,55 +1,131 @@
-.header{
+.header {
+    width: 100%;
     height: 34vw;
+    min-height: 300px;
     margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-    background-size: contain;
+    background: url('/header_img.png') no-repeat center;
+    background-size: cover; /* 🔥 FIX */
     position: relative;
+    border-radius: 15px;
+    overflow: hidden;
 }
-.header-component{
+
+/* CONTENT */
+.header-component {
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    gap: 1.5vw;
+    align-items: flex-start;
+    gap: 1.2vw;
     max-width: 50%;
     bottom: 10%;
     left: 6vw;
-    animation: fadeIn 3s;
-}
-.header-component h2{
-    font-weight: 500;
-    color: white;
-    font-size: max(4.5vw,22px);
-}
-.header-component p{
-    color: white;
-    font-size: 1vw;
+    animation: fadeIn 1.5s;
 }
 
-.header-component button{
+/* HEADING */
+.header-component h2 {
+    font-weight: 600;
+    color: white;
+    font-size: max(4vw, 24px);
+    line-height: 1.2;
+}
+
+/* TEXT */
+.header-component p {
+    color: white;
+    font-size: 1vw;
+    line-height: 1.4;
+}
+
+/* BUTTON */
+.header-component button {
     border: none;
-    color: #747474;
+    color: #333;
     font-weight: 500;
-    padding: 1vw, 2.3vw;
+    padding: 10px 20px; /* 🔥 FIX */
     background-color: white;
-    font-size: max(1vw,13px);
+    font-size: max(1vw, 13px);
     border-radius: 50px;
-    height: 30px;
-    width: 80px;
+    cursor: pointer;
+    transition: 0.3s;
 }
-@media (max-width:1050px) {
-    .header-component{
-        max-width: 45%;
+
+.header-component button:hover {
+    background-color: tomato;
+    color: white;
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+@media (max-width: 1050px) {
+    .header {
+        height: 40vw;
+    }
+
+    .header-component {
+        max-width: 60%;
+    }
+
+    .header-component p {
+        font-size: 13px;
     }
 }
-@media (max-width:750px) {
-    .header-component{
-        max-width: 65%;
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+@media (max-width: 768px) {
+    .header {
+        height: 50vw;
+        min-height: 250px;
     }
-    .header-component p{
-        display: none;
+
+    .header-component {
+        max-width: 75%;
+        gap: 10px;
     }
-    .header-component button{
-        padding: 2vw 4vw;
+
+    .header-component h2 {
+        font-size: 20px;
+    }
+
+    .header-component p {
+        font-size: 12px;
+    }
+
+    .header-component button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+}
+
+/* ========================= */
+/* 📱 SMALL MOBILE */
+/* ========================= */
+@media (max-width: 480px) {
+    .header {
+        height: 60vw;
+        min-height: 220px;
+    }
+
+    .header-component {
+        max-width: 85%;
+        left: 5vw;
+        bottom: 8%;
+    }
+
+    .header-component h2 {
+        font-size: 18px;
+    }
+
+    .header-component p {
+        display: none; /* 🔥 clean mobile */
+    }
+
+    .header-component button {
+        padding: 6px 14px;
+        font-size: 11px;
     }
 }

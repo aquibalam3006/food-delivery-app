@@ -1,36 +1,111 @@
-.place-order{
+.place-order {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 50px;
     margin-top: 100px;
+    padding: 0 16px;
 }
-.place-order-left{
+
+/* LEFT SIDE */
+.place-order-left {
     width: 100%;
-    max-width: max(30%,500px);
+    max-width: max(30%, 500px);
 }
-.place-order-left .title{
-    font-size: 30px;
+
+.place-order-left .title {
+    font-size: 28px;
     font-weight: 600;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
-.place-order-left input{
+
+.place-order-left input {
     margin-bottom: 15px;
     width: 100%;
     padding: 10px;
     border: 1px solid #c5c5c5;
-    border-radius: 4px;
+    border-radius: 6px;
     outline-color: tomato;
 }
-.place-order-left .multi-field{
+
+/* MULTI FIELD */
+.place-order-left .multi-field {
     display: flex;
     gap: 10px;
 }
 
-.place-order-right{
+/* RIGHT SIDE */
+.place-order-right {
     width: 100%;
-    max-width: max(40%,500px);
+    max-width: max(40%, 500px);
 }
-.place-order .cart-total button{
+
+/* BUTTON */
+.place-order .cart-total button {
     margin-top: 30px;
+    width: 100%;
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+@media (max-width: 1024px) {
+    .place-order {
+        gap: 30px;
+    }
+
+    .place-order-left .title {
+        font-size: 24px;
+    }
+}
+
+/* ========================= */
+/* 📱 MOBILE */
+/* ========================= */
+@media (max-width: 768px) {
+
+    .place-order {
+        flex-direction: column; /* 🔥 IMPORTANT */
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .place-order-left,
+    .place-order-right {
+        max-width: 100%;
+    }
+
+    .place-order-left .title {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+
+    .place-order-left .multi-field {
+        flex-direction: column; /* 🔥 stack inputs */
+        gap: 15px;
+    }
+}
+
+/* ========================= */
+/* 📱 SMALL MOBILE */
+/* ========================= */
+@media (max-width: 480px) {
+
+    .place-order {
+        margin-top: 30px;
+        gap: 20px;
+    }
+
+    .place-order-left input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .place-order-left .title {
+        font-size: 20px;
+    }
+
+    .place-order .cart-total {
+        padding: 15px;
+    }
 }

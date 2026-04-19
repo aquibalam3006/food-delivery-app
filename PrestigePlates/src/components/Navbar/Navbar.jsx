@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const Navbar = ({ setShowLogin }) => {
 
   const [menu, setMenu] = useState("Home");
+  const [showMenu, setShowMenu] = useState(false); // 🔥 hamburger state
 
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
 
@@ -26,20 +27,28 @@ const Navbar = ({ setShowLogin }) => {
         <img src={assets.logo} alt="" className="logo" />
       </Link>
 
-      <ul className="navbar-menu">
-        <Link to='/' onClick={() => setMenu("Home")} className={menu === "Home" ? "active" : ""}>Home</Link>
-        <a href='#explore-menu' onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active" : ""}>Menu</a>
-        <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
-        <a href='#footer' onClick={() => setMenu("Contact-Us")} className={menu === "Contact-Us" ? "active" : ""}>Contact-Us</a>
+      {/* 🔥 DESKTOP MENU */}
+      <ul className={`navbar-menu ${showMenu ? "active-menu" : ""}`}>
+        <Link to='/' onClick={() => { setMenu("Home"); setShowMenu(false); }} className={menu === "Home" ? "active" : ""}>Home</Link>
+        <a href='#explore-menu' onClick={() => { setMenu("Menu"); setShowMenu(false); }}>Menu</a>
+        <a href='#app-download' onClick={() => { setMenu("Mobile-App"); setShowMenu(false); }}>Mobile-App</a>
+        <a href='#footer' onClick={() => { setMenu("Contact-Us"); setShowMenu(false); }}>Contact-Us</a>
       </ul>
 
+      {/* 🔥 RIGHT SIDE */}
       <div className="navbar-right">
+
+        {/* 🔥 HAMBURGER ICON */}
+        <img 
+          src={assets.menu_icon} 
+          alt="" 
+          className='hamburger'
+          onClick={() => setShowMenu(!showMenu)}
+        />
 
         <img src={assets.search_icon} alt="" />
 
         <div className="navbar-search_icon">
-
-          {/* 🔥 FIXED CART LOGIC */}
           {token ? (
             <Link to='/cart'>
               <img src={assets.basket_icon} alt="" />
@@ -55,32 +64,24 @@ const Navbar = ({ setShowLogin }) => {
               style={{ cursor: "pointer" }}
             />
           )}
-
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
 
-        {/* LOGIN / PROFILE */}
         {!token ? (
           <button onClick={() => setShowLogin(true)}>Sign in</button>
         ) : (
           <div className='navbar-profile'>
             <img src={assets.profile_icon} alt="" />
             <ul className='nav-profile-dropdown'>
-
               <li>
                 <img src={assets.bag_icon} alt="" />
-                <p onClick={() => navigate('/myorders')} style={{ cursor: "pointer" }}>
-                  Orders
-                </p>
+                <p onClick={() => navigate('/myorders')}>Orders</p>
               </li>
-
               <hr />
-
               <li onClick={logout}>
                 <img src={assets.logout_icon} alt="" />
                 <p>Logout</p>
               </li>
-
             </ul>
           </div>
         )}
