@@ -8,6 +8,7 @@ import Orders from './pages/Orders/Orders'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Login from "./pages/Login";
+import Welcome from './pages/Welcome'
 
 const App = () => {
 
@@ -36,7 +37,7 @@ const App = () => {
         {location.pathname !== "/login" && <Sidebar />}
 
         <Routes>
-          <Route path='/' element={<Login/>} />
+          <Route path='/' element={<Welcome/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/add" element={<Add />} />
           <Route path="/list" element={<List />} />
