@@ -70,14 +70,21 @@ const PlaceOrder = () => {
         quantity: cartItems[item._id]
       }));
 
+    const BASE_URL =
+      window.location.hostname === "localhost"
+        ? "http://localhost:4000"
+        : "https://food-delivery-app-lg9f.onrender.com";
+
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/order/place",
+        `${BASE_URL}/api/order/place`,
         { items },
         {
           headers: { token }
         }
       );
+
+      console.log("Stripe Response:", response.data); // DEBUG
 
       if (response.data.success) {
         window.location.href = response.data.url;
@@ -90,7 +97,6 @@ const PlaceOrder = () => {
       toast.error("Server error ❌");
     }
   };
-
   return (
     <form className='place-order'>
 

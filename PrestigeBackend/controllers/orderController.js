@@ -35,8 +35,8 @@ const placeOrder = async (req, res) => {
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
-      success_url: `http://localhost:5173/success?orderId=${savedOrder._id}`,
-      cancel_url: "http://localhost:5173/cart",
+      success_url: `https://food-delivery-app-murex-one.vercel.app/success?orderId=${savedOrder._id}`,
+      cancel_url: `https://food-delivery-app-murex-one.vercel.app/cart`,
     });
 
     res.json({ success: true, url: session.url });

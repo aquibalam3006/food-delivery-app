@@ -11,9 +11,9 @@ const StoreContextProvider = (props) => {
         setCartItems({});
     };
     const url =
-    window.location.hostname === "localhost"
-    ? "http://localhost:4000"
-    : "https://food-delivery-app-lg9f.onrender.com";
+        window.location.hostname === "localhost"
+            ? "http://localhost:4000"
+            : "https://food-delivery-app-lg9f.onrender.com";
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([])
 
@@ -21,23 +21,32 @@ const StoreContextProvider = (props) => {
 
     // Add item to cart if it doesn't exist, otherwise increment count
     const addToCart = async (itemId) => {
+
+        if (!token) {
+            alert("Please login first 🔐");   // simple alert (ya toast)
+            return;
+        }
+
         if (!cartItems[itemId]) {
             setCartItems((prev) => ({ ...prev, [itemId]: 1 }))
-        }
-        else {
+        } else {
             setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         }
-        if (token) {
-            await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } })
-        }
+
+        await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } })
     }
 
     // Remove item from cart 
     const removeFromCart = async (itemId) => {
-        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
-        if (token) {
-            await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } })
+
+        if (!token) {
+            alert("Please login first 🔐");
+            return;
         }
+
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+
+        await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } })
     }
 
     const getTotalCartAmount = () => {

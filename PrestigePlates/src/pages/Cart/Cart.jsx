@@ -1,4 +1,4 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"; import React from 'react'
 import './Cart.css'
 import { useContext } from 'react'
 import { StoreContext } from '../../context/StoreContext'
@@ -10,6 +10,15 @@ const Cart = () => {
   const { cartItems, food_list, removeFromCart, getTotalCartAmount, url } = useContext(StoreContext);
 
   const navigate = useNavigate();
+
+  if (!token) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "100px" }}>
+        <h2>Please login to view cart 🔐</h2>
+        <button onClick={() => navigate("/")}>Go to Home</button>
+      </div>
+    )
+  }
 
   return (
     <div className='cart'>
