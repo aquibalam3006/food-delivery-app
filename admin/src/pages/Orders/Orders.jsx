@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './Orders.css'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import BASE_URL from '../../config'
 
-const Orders = ({url}) => {
+const Orders = () => {
 
   const [orders, setOrders] = useState([])
 
   const fetchOrders = async () => {
-    const response = await axios.get(`${url}/api/order/list`)
+    const response = await axios.get(`${BASE_URL}/api/order/list`)
     if(response.data.success){
       setOrders(response.data.data)
     }else{
@@ -17,7 +18,7 @@ const Orders = ({url}) => {
   }
 
   const statusHandler = async (event, orderId) => {
-    const response = await axios.post(`${url}/api/order/status`, {
+    const response = await axios.post(`${BASE_URL}/api/order/status`, {
       id: orderId,
       status: event.target.value
     })
