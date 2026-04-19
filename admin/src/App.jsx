@@ -36,6 +36,7 @@ const App = () => {
         {location.pathname !== "/login" && <Sidebar />}
 
         <Routes>
+          <Route path='/' element={<Login/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/add" element={<Add />} />
           <Route path="/list" element={<List />} />
