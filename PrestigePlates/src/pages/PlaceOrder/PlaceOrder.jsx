@@ -78,7 +78,7 @@ const PlaceOrder = () => {
     try {
       const response = await axios.post(
         `${BASE_URL}/api/order/place`,
-        { items },
+        { items, userId: "tempUser" },
         {
           headers: { token }
         }

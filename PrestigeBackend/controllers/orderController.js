@@ -12,7 +12,7 @@ const placeOrder = async (req, res) => {
     const amount = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const newOrder = new orderModel({
-      userId,
+      userId:"tempUser",
       items,
       amount,
       address: {},
