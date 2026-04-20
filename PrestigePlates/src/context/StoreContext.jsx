@@ -106,7 +106,11 @@ const StoreContextProvider = (props) => {
                 { headers: { token } }
             );
 
-            setCartItems(response.data.cartData || {});
+            // ✅ IMPORTANT FIX
+            if (response.data.cartData && Object.keys(response.data.cartData).length > 0) {
+                setCartItems(response.data.cartData);
+            }
+
         } catch (error) {
             console.log("Cart load error:", error);
         }
@@ -119,10 +123,23 @@ const StoreContextProvider = (props) => {
 
             await fetchFoodList();
 
+            // ✅ FIRST LOAD LOCAL STORAGE
+            const savedCart = localStorage.getItem("cart");
+            if (savedCart && savedCart !== "undefined") {
+                try {
+                    setCartItems(JSON.parse(savedCart));
+                } catch {
+                    setCartItems({});
+                }
+            }
+
+            // ✅ THEN TOKEN
             const savedToken = localStorage.getItem("token");
 
             if (savedToken) {
                 setToken(savedToken);
+
+                // 🔥 ONLY UPDATE IF BACKEND HAS DATA
                 await loadCartData(savedToken);
             }
         }
