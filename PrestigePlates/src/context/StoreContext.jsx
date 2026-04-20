@@ -3,16 +3,17 @@ import axios from "axios";
 export const StoreContext = createContext(null)
 
 
-useEffect(() => {
-    const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-        setCartItems(JSON.parse(savedCart));
-    }
-}, []);
+
 
 const StoreContextProvider = (props) => {
 
     const [cartItems, setCartItems] = useState({});
+    useEffect(() => {
+        const savedCart = localStorage.getItem("cart");
+        if (savedCart) {
+            setCartItems(JSON.parse(savedCart));
+        }
+    }, []);
     const clearCart = () => {
         setCartItems({});
     };
