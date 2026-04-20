@@ -10,21 +10,14 @@ import orderRouter from "./routes/orderRoute.js"
 
 // app configuration
 const app = express()
-
-const port = 4000
+const port = process.env.PORT || 4000;
 
 // middleware
 app.use(express.json())
 app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "https://food-delivery-app-murex-one.vercel.app"
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "token"],
-    credentials: true
+  origin: "*"
 }));
-app.options("*", cors());
+
 
 // DB connection
 connectDB();
