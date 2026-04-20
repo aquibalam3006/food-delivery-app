@@ -7,6 +7,10 @@ const FoodDisplay = ({ category }) => {
 
   const { food_list } = useContext(StoreContext)
 
+  if (!food_list || food_list.length === 0) {
+    return <p>Loading...</p>;
+  }
+
   const filteredItems = food_list.filter(item =>
     category === "All" ||
     category.toLowerCase().trim() === item.category.toLowerCase().trim()
