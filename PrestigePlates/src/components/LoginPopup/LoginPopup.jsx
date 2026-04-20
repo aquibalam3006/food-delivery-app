@@ -23,30 +23,40 @@ const LoginPopup = ({ setShowLogin }) => {
   };
 
   const onLogin = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    try {
-      let newUrl = url;
-      if (currentState === "Login") {
-        newUrl += "/api/user/login";
-      } else {
-        newUrl += "/api/user/register";
-      }
+  const BASE_URL =
+    window.location.hostname === "localhost"
+      ? "http://localhost:4000"
+      : "https://food-delivery-app-lg9f.onrender.com";
 
-      const response = await axios.post(newUrl, data);
+  try {
+    let newUrl = BASE_URL;
 
-      if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-        setShowLogin(false);
-      } else {
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      alert("Server error ❌");
+    if (currentState === "Login") {
+      newUrl += "/api/user/login";
+    } else {
+      newUrl += "/api/user/register";
     }
-  };
+
+    console.log("API URL:", newUrl); // 🔍 debug
+
+    const response = await axios.post(newUrl, data);
+
+    console.log("Response:", response.data); // 🔍 debug
+
+    if (response.data.success) {
+      setToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      setShowLogin(false);
+    } else {
+      alert(response.data.message);
+    }
+  } catch (error) {
+    console.log("LOGIN ERROR:", error);
+    alert("Server error ❌");
+  }
+};
 
   return (
     <div className="login-popup">
