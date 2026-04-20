@@ -3,6 +3,12 @@ import axios from "axios";
 export const StoreContext = createContext(null)
 
 
+useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+        setCartItems(JSON.parse(savedCart));
+    }
+}, []);
 
 const StoreContextProvider = (props) => {
 
@@ -84,13 +90,17 @@ const StoreContextProvider = (props) => {
             if (localStorage.getItem("token")) {
                 const savedToken = localStorage.getItem("token");
                 setToken(savedToken);
+
+                await loadCartData(savedToken); // 🔥 IMPORTANT
             }
         }
         loadData();
     }, [])
 
 
-
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    }, [cartItems]);
 
 
 

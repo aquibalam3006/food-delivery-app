@@ -3,6 +3,12 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+if (!items || items.length === 0) {
+  return res.json({ success: false, message: "Cart empty ❌" });
+}
+console.log("Items:", items);
+console.log("Stripe Key:", process.env.STRIPE_SECRET_KEY);
+
 // PLACE ORDER (Stripe)
 const placeOrder = async (req, res) => {
   try {
@@ -12,7 +18,7 @@ const placeOrder = async (req, res) => {
     const amount = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const newOrder = new orderModel({
-      userId:"tempUser",
+      userId: "tempUser",
       items,
       amount,
       address: {},
